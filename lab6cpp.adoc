@@ -269,6 +269,6 @@ void addInHead(element **head, int value)
          p->next = *head;
          //Переміщення вказівника на голову
          //на новий елемент
-    *head = р;
+    *head = p;
 }
 
