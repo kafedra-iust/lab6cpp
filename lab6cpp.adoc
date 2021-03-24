@@ -173,7 +173,7 @@ void addToList(element **head, element **tail, int value)
         //встановлення покажчика head на перший елемент
         *head = p;
        //інакше встановлення зв'язку між останнім елементом списку й новим
-    else *tail->next = p;
+    else (*tail)->next = p;
     //встановлення покажчика кінця списку на новий елемент
     *tail = p;
 }
