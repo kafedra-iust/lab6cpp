@@ -8,9 +8,35 @@ struct element
     element *next;
 };
 
+void printList(element *head) {
+    element *p = head;
+    while (p != nullptr) {
+        cout << p->data << " ";
+        p = p->next;
+    }
+}
 
-void addToList(element **head, element **tail, int value)
+void printListRec(element *head) {
+    if (head != nullptr) {
+        cout << head->data << " ";
+        printListRec(head->next);
+    }
+}
+
+void addInHead(element **head, int value)
 {
+    //виділення пам'яті під новий елемент списку
+    element *p = new element;
+    //заповнення інформаційної частини
+    p->data = value;
+    if (*head != nullptr) //якщо список не порожній
+        //встановлення зв'язку між першим елементом списку й новим
+        p->next = *head;
+    //Переміщення вказівника на голову на новий елемент
+    *head = p;
+}
+
+void addToList(element **head, element **tail, int value) {
     //виділення пам'яті під новий елемент списку
     element *p = new element;
     //заповнення інформаційної частини
@@ -29,6 +55,15 @@ void addToList(element **head, element **tail, int value)
 
 int main() {
     element *head = nullptr, *tail = nullptr;
+    addToList(&head, &tail, 1);
+    addToList(&head, &tail, 2);
+    addToList(&head, &tail, 3);
+    addToList(&head, &tail, 4);
+    addToList(&head, &tail, 5);
+    addToList(&head, &tail, 6);
+    addToList(&head, &tail, 7);
+
+    printListRec(head);
 
     return 0;
 }
