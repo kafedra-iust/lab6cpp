@@ -53,6 +53,67 @@ void addToList(element **head, element **tail, int value) {
     *tail = p;
 }
 
+element * findNode(element * head, int x)
+{
+    // покажчик на перший елемент списку
+    element * node = head;
+    while(node != nullptr) {    // або while(node)
+        //якщо заданий елемент знайдено
+        if (node->data == x)
+            //закінчення пошуку і повернення покажчика на цей елемент
+            return node;
+            // у іншому випадку
+        else
+            // перехід на наступний елемент списку
+            node = node->next;
+    }
+    // якщо список вичерпано, то шуканий елемент не знайдено,
+    // тому повертаємо «порожнє» значення
+    return nullptr;
+}
+
+void addNodeAfter(element ** pk, int value)
+{
+    //створення нового динамічного об'єкта
+    element * p = new element;
+    //запис інформаційної частини
+    p->data = value;
+    //заповнення покажчика на наступний елемент
+    p->next = (*pk)->next;
+    //додавання нового елемента в список
+    (*pk)->next = p;
+}
+
+int deleteFirst(element ** head)
+{
+    //зберігаємо адресу елемента, який потрібно видалити
+    element * p = *head;
+    //отримуємо з нього інформацію
+    int value = p->data;
+    //встановлюємо голову списку на наступний елемент
+    *head = p->next;
+    //видаляємо перший елемент
+    delete p;
+    // повертаємо значення видаленого елемента
+    return value;
+}
+
+int deleteLast(element * head)
+{
+    //знаходження передостаннього елемента списку
+    element * p = head;
+    while (p->next->next != nullptr) p = p->next;
+    //збереження адреси останнього елемента
+    element * temp = p->next; // tail
+    //вибирання з нього інформації
+    int value = p->next->data; // або value = temp->data;
+    //видалення останнього елемента
+    delete temp;
+    //збереження ознаки кінця списку
+    p->next = nullptr;
+    return value;
+}
+
 int main() {
     element *head = nullptr, *tail = nullptr;
     addToList(&head, &tail, 1);
@@ -62,6 +123,24 @@ int main() {
     addToList(&head, &tail, 5);
     addToList(&head, &tail, 6);
     addToList(&head, &tail, 7);
+
+    printListRec(head);
+    cout << endl;
+
+    element * pk = findNode(head, 4);
+    addNodeAfter(&pk, 45);
+
+    printListRec(head);
+    cout << endl;
+
+    int v = deleteFirst(&head);
+    cout << "v = " << v << endl;
+
+    printListRec(head);
+    cout << endl;
+
+    v = deleteLast(head);
+    cout << "v = " << v << endl;
 
     printListRec(head);
 
