@@ -1,4 +1,5 @@
-
+#include <cstdio>
+#include <cstring>
 #include <iostream>
 
 using namespace std;
@@ -9,10 +10,10 @@ struct lnk {
     lnk *next;
 };
 
-int main() {
+int main1() {
     int nr, n;
     int *k, *p;
-    lnk *cR, *fst;
+    lnk *cR, *fst, *p1;
     string nAr[3];
     int pAr[3];
     cin >> n;
@@ -35,13 +36,15 @@ int main() {
         cR->next = fst;
         fst = cR;
     }
-// --- 16 var ---
+// --- 1 var ---
+
+    fst->next = fst->next->next;
     cout << cR->ph << endl;
     cR=fst;
-    for (int i=2;i>=0;i--){
+    while (cR!=nullptr){
         cout << cR->name << " " << cR->ph << endl;
         cR=cR->next;
     }
-    cout << "nr=" << nr;
+    cout << nr << endl;
     cout << " " << fst->name << endl;
 }
